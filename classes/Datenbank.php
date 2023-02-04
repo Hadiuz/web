@@ -14,6 +14,13 @@
                 echo "Connection failed";
             }
         }
+        public function connectUserDB($username){
+            if($this->db_handle = mysqli_connect($this->db_host, $this->db_username, $this->db_password, $username)){
+
+            }else {
+                echo "Connection failed";
+            }
+        }
 
         public function mysqlClose(){
             mysqli_close($this->db_handle);
@@ -61,15 +68,28 @@
         public function isUsernameTaken($username){
             $this->mysqlConnect();
 
-            $sql = "SELECT * FROM nutzer WHERE password = username = '".$username."'";
+            $sql = "SELECT * FROM nutzer WHERE username = '".$username."'";
+
+            if(null == $result = mysqli_query($this->db_handle, $sql)){
+                $this->mysqlClose();
+                return true;
+            }else{
+                $this->mysqlClose();
+                return false;
+            }
+            
+        }
+        public function  newUser($username){
+            $this->mysqlConnect();
+            $sql = "CREATE TABLE `userdata`.`".$username."` (`modname` VARCHAR(512) NOT NULL , `Items` JSON NULL DEFAULT NULL , `Blocks` JSON NULL DEFAULT NULL ) ENGINE = InnoDB;";
 
             if($result = mysqli_query($this->db_handle, $sql)){
-                    
-                    return false;
-                }else{
-                    return true;
-                }
-            
+                $this->mysqlClose();
+            }else{
+                $this->mysqlClose();
+                echo "Fehler beim Anlegen";
+            }
+
         }
     }
 

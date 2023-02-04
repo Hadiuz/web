@@ -20,9 +20,14 @@
         
         
         echo "<body>";
-       
-            echo "<h1>Startseite</h1>";
-            echo "Diese Seite hat absolut nichts zu bieten";
+
+            if ($user->getData()!=null){
+
+            }else{
+                echo "<h1>Startseite</h1>";
+                echo "Diese Seite hat absolut nichts zu bieten";
+            }
+
 
 
 

@@ -14,21 +14,20 @@
         }
         
         public function printLog($user){
+            require_once "Tool.php";
+            $tool = new Tool();
           
             if($user->getData() != null){
                 echo "<br>";
                 
                 echo $user->getData()['vorname'];
 
-                echo "<div class=\"button\">",
+                echo "<div class=\"logButton\">",
                 "<form method=\"POST\">",
                 "<input type=\"submit\" name=\"logout\" value=\"Logout\" />",
                 "</form>",
                 "</div>";
 
-                
-                echo "<br>",
-                "<img src=\"images/rainbow.png\"";
                 
                 if(isset($_POST['logout'])) {
                     $user->reset();
@@ -37,7 +36,7 @@
                 }
             
             }else{
-                echo "<div class=\"button\">",
+                echo "<div class=\"logButton\">",
                 "<form method=\"POST\">",
                 "<input type=\"submit\" name=\"login\" value=\"Login\" />",
                 "<input type=\"submit\" name=\"register\" value=\"Register\" />",
@@ -50,7 +49,8 @@
                 if(isset($_POST['register'])){
                     header("Location:register.php");
                 }
-
+                //$tool->headerButton("Login", "Location:login.php", "logButton");
+                //$tool->headerButton("Register", "Location:register.php", "logButton");
                 
            
             }

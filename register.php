@@ -93,6 +93,8 @@
                 .$_POST['vorname']."','".$_POST['nachname']."','".$_POST['email']."','".$_POST['password']."','".$_POST['username']."');";
     
                 $db->mysqlEntry($sql_content);
+
+                $db->newUser($username);
                 
                 session_start();
                 $_SESSION = $_POST;
